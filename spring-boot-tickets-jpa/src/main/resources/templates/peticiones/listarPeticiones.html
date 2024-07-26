@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+		
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+			<table class="table table-striped">
+				<thead>
+					<th>ID</th>
+					<th>Tipo De Peticion</th>
+					<th>Fecha</th>
+					<th>Usuario</th>
+				</thead>
+				<tbody>
+					<tr th:each="peticion:${peticiones}">
+						<td th:text="${peticion.id_request}"></td>
+						<td th:text="${peticion.tipo_peticion}"></td>
+						<td th:text="${peticion.fecha_peticion}"></td>
+						<td th:text="${peticion.usuario}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>

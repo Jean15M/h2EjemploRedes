@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+		
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			<h4 class="card-title">
+				<a th:href="@{/form_ticket}" class="btn btn-success btn-xs">Crear Ticket</a>
+			</h4>
+			
+			<table class="table table-striped">
+				<thead>
+					<th>Ticket#</th>
+					<th>Creado en</th>
+					<th>Estado</th>
+					<th>Asunto</th>
+					<th>Departamento</th>
+					<th>Ver</th>
+					<th>Cambiar Estado</th>
+				</thead>
+				<tbody>
+					<tr th:each="ticket:${tickets}">
+						<td th:text="${ticket.id_ticket}"></td>
+						<td th:text="${ticket.fecha_creacion}"></td>
+						<td><span th:text="${ticket.estado}" th:if="${ticket.estado == 'Pendiente'}" class="text-danger"></span>
+                		<span th:text="${ticket.estado}" th:if="${ticket.estado == 'Aceptado'}" class="text-primary"></span></td>
+						<td th:text="${ticket.asunto}"></td>
+						<td th:text="${ticket.departamento}"></td>
+						<td><a class="btn btn-primary btn-xs"
+							th:href="@{/ver/} + ${ticket.id_ticket}" th:text="'ver'"></a></td>
+						<td><form th:action="@{/form_ticket/{id}(id=${ticket.id_ticket})}" method="get">
+                    			<button type="submit" class="btn btn-success btn-xs">Aceptar</button>
+                			</form>
+                		</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+
+</html>

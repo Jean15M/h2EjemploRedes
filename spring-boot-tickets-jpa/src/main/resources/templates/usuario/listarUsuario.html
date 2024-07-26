@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+		
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			<h4 class="card-title">
+				<a th:href="@{/formUsuario}" class="btn btn-success btn-xs">crear usuario</a>
+			</h4>
+			
+			<table class="table table-striped">
+				<thead>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th>Telefono</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</thead>
+				<tbody>
+					<tr th:each="usuario:${usuarios}">
+						<td th:text="${usuario.id_usuario}"></td>
+						<td th:text="${usuario.nombre +' '+ usuario.apellido}"></td>
+						<td th:text="${usuario.email}"></td>
+						<td th:text="${usuario.telefono}"></td>
+						<td><a class="btn btn-primary btn-xs"
+							th:href="@{/formUsuario/} + ${usuario.id_usuario}" th:text="'editar'"></a></td>
+						<td><a class="btn btn-danger btn-xs"
+							th:href="@{/eliminarUsuario/} + ${usuario.id_usuario}" th:text="'eliminar'"
+							onclick="return confirmDelete(this);"></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+<script type="text/javascript">
+	function confirmDelete(element) {
+		var confirmMessage = "¿Está seguro de que desea eliminar este usuario?";
+		if (confirm(confirmMessage)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
+</html>

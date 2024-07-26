@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+			<div class="row">
+				<div class="col">
+					<h2>INFORMACIÓN DEL TICKET</h2>
+					<ul class="list-group">
+						<li class="list-group-item" th:text="'ESTADO: '+${ticket.estado}"></li>
+						<li class="list-group-item" th:text="'DEPARTAMENTO: '+${ticket.departamento}"></li>
+						<li class="list-group-item" th:text="'CREADO EN: '+${ticket.fecha_creacion}"></li>
+					</ul>
+				</div>
+				<div class="col">
+					<h2>INFORMACIÓN DEL USUARIO</h2>
+					<ul class="list-group">
+						<li class="list-group-item" th:text="'NOMBRE: '+${usuario.nombre +' '+usuario.apellido}"></li>
+						<li class="list-group-item" th:text="'EMAIL: '+${usuario.email}"></li>
+						<li class="list-group-item" th:text="'TELEFONO: '+${usuario.telefono}"></li>
+					</ul>
+				</div>
+			</div>
+			<h2>DETALLES DEL TICKET</h2>
+			<ul class="list-group">
+				<li class="list-group-item" th:text="'LOCALIDAD: '+${ticket.localidad}"></li>
+				<li class="list-group-item" th:text="'ASUNTO: '+${ticket.asunto}"></li>
+				<li class="list-group-item" th:text="${ticket.detalle_ticket}"></li>
+			</ul>
+			<img th:if="${#strings.length(ticket.imagen) > 0}" class="img-thumbnail rounded float-left" style="max-width: 25%;" th:src="@{'/uploads/' +  ${ticket.imagen}}" th:alt="${ticket.imagen}">
+			</div>
+		</div>
+		<footer th:replace="layout/layout :: footer"></footer>
+	</div>
+
+</body>
+</html>
